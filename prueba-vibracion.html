@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Cunda · prueba de vibración</title>
+<style>
+@font-face { font-family: "Onest"; src: url("/fonts/onest.woff2") format("woff2"); font-weight: 100 900; }
+body { margin: 0; padding: calc(env(safe-area-inset-top) + 20px) 20px 40px; background: #F4EEE5; color: #1C1813; font: 16px/1.45 "Onest", system-ui, sans-serif; }
+h1 { font-size: 26px; font-weight: 500; margin: 0 0 4px; }
+p { margin: 0; color: #6A6056; }
+.t { background: #FFFCF7; border: 1px solid #E6DCCE; border-radius: 18px; padding: 16px; margin-top: 14px; display: grid; gap: 10px; }
+.t b { font-size: 18px; font-weight: 500; }
+button { font: inherit; font-size: 17px; min-height: 52px; border: 0; border-radius: 999px; background: #1C1813; color: #FFFCF7; }
+input[type=range] { width: 100%; height: 44px; }
+.hide { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; pointer-events: none; }
+.big input[switch] { transform: scale(1.6); transform-origin: left center; margin: 8px 0; }
+small { color: #6A6056; }
+</style>
+</head>
+<body>
+<h1>Prueba de vibración</h1>
+<p>Haz las 4 pruebas abriendo Cunda desde el icono. Para cada una, apunta si notas un toque.</p>
+
+<div class="t big"><b>1 · Toca el interruptor</b><label><input type="checkbox" switch id="sw1"> </label><small>El interruptor nativo de iOS. Si aquí no vibra, revisa Ajustes → Sonidos y vibraciones → Vibración del sistema.</small></div>
+
+<div class="t"><b>2 · Desliza despacio</b><input type="range" min="0" max="50" value="0" id="rg"><small>Debería dar un toque por cada paso (0 a 50). Es la regla de páginas de la v2.</small></div>
+
+<div class="t"><b>3 · Pulsa el botón</b><button id="bt">Un toque</button><small>Toque lanzado por el código al pulsar.</small></div>
+
+<div class="t"><b>4 · Toques solos</b><button id="au">Empezar (5 toques, uno por segundo)</button><small>Sin tocar la pantalla. Comprueba si puede avisar durante un bloque.</small></div>
+
+<label class="hide" id="hl"><input type="checkbox" switch tabindex="-1" aria-hidden="true"></label>
+<script>
+var hl = document.getElementById("hl");
+function tap() { hl.click(); }
+var last = 0, rg = document.getElementById("rg");
+rg.addEventListener("input", function () { var v = +rg.value; if (v !== last) { last = v; tap(); } });
+document.getElementById("bt").addEventListener("click", tap);
+document.getElementById("au").addEventListener("click", function () { var n = 0, t = setInterval(function () { tap(); if (++n >= 5) clearInterval(t); }, 1000); });
+</script>
+</body>
+</html>
