@@ -1,0 +1,17 @@
+{
+  "name": "Cunda",
+  "short_name": "Cunda",
+  "description": "Intervalos de estudio con objetivo de páginas. Menos horas. Más temario.",
+  "lang": "es",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4EEE5",
+  "theme_color": "#F4EEE5",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
